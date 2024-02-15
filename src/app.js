@@ -10,11 +10,18 @@ function addBoxes(n) {
   gridBoxesCount.clear();
 
   //  add new children
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < n * n; i++) {
     let gridBox = document.createElement("div");
     gridBox.className = "grid-box";
     gridBox.id = `grid-box${i + 1}`;
     gridBox.textContent = `${i + 1}`;
+    if (n > 31) {
+      gridBox.style.width = `calc(200% / ${n})`;
+      gridBox.style.height = `calc(200% / ${n})`;
+    } else {
+      gridBox.style.width = `calc(100% / ${n})`;
+      gridBox.style.height = `calc(100% / ${n})`;
+    }
     gridContainer.appendChild(gridBox);
   }
 }
@@ -39,8 +46,8 @@ function hover(id, count) {
   let b = 0;
   let opVal = (count * 10) / 100;
   let op = opVal > 1 ? 1 : opVal;
-  let bgColor = `background-color: rgba(${r}, ${g}, ${b}, ${op});`;
-  box.style.cssText = bgColor;
+  let bgColor = `rgba(${r}, ${g}, ${b}, ${op})`;
+  box.style.backgroundColor = bgColor;
 }
 
 const promptButton = document.querySelector("#size-prompt");
